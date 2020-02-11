@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/MainMenu/StartSpace.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1055.0
+margin_bottom = 611.0
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartSpace" type="Button" parent="."]
+margin_left = 321.0
+margin_top = 91.0
+margin_right = 708.0
+margin_bottom = 151.0
+text = "Start Space"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartPlanet" type="Button" parent="."]
+margin_left = 321.0
+margin_top = 173.0
+margin_right = 708.0
+margin_bottom = 233.0
+disabled = true
+text = "Start Planet Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}

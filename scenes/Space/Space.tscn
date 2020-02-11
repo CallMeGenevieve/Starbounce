@@ -1,0 +1,22 @@
+[gd_scene format=2]
+
+[node name="Space" type="Node2D"]
+
+[node name="SpaceBackground" type="ColorRect" parent="."]
+margin_right = 1068.0
+margin_bottom = 621.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseMenu" type="Node2D" parent="."]
+visible = false
+
+[node name="PauseMenuBackground" type="ColorRect" parent="PauseMenu"]
+margin_right = 1068.0
+margin_bottom = 621.0
+color = Color( 0.470588, 0.470588, 0.470588, 0.439216 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
