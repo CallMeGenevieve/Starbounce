@@ -46,3 +46,5 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="PauseMenu/BackToGame" to="PauseMenu/BackToGame" method="_on_BackToGame_pressed"]
+[connection signal="pressed" from="PauseMenu/BackToMainMenu" to="PauseMenu/BackToMainMenu" method="_on_BackToMainMenu_pressed"]
