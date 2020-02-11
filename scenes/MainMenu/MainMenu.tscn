@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/MainMenu/StartSpace.gd" type="Script" id=1]
+[ext_resource path="res://scenes/MainMenu/ExitGame.gd" type="Script" id=2]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -30,6 +31,17 @@ margin_right = 708.0
 margin_bottom = 233.0
 disabled = true
 text = "Start Planet Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitGame" type="Button" parent="."]
+margin_left = 321.0
+margin_top = 409.769
+margin_right = 708.0
+margin_bottom = 469.769
+text = "Exit Game"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
