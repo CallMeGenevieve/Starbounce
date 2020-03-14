@@ -1,39 +1,94 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Space/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Space/BackToGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Space/BackToMainMenu.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Space/Space.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Space/Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://textures/hope_ship.png" type="Texture" id=6]
+[ext_resource path="res://scenes/Space/KinematicBody2D.gd" type="Script" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), -0.85, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.429688, 0.0050354, 0.0050354, 1, 0, 0, 0, 1 )
 
 [node name="Space" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="SpaceBackground" type="ColorRect" parent="."]
-margin_right = 1068.0
-margin_bottom = 621.0
+[node name="HopeShip" type="KinematicBody2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="SpaceBackground" type="ColorRect" parent="HopeShip"]
+margin_left = -2000.0
+margin_top = -2000.0
+margin_right = 2000.0
+margin_bottom = 2000.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HopeShip"]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="HopeShip"]
+current = true
+script = ExtResource( 5 )
+
+[node name="Positional Particles" type="CPUParticles2D" parent="HopeShip"]
+amount = 24
+lifetime = 8.0
+local_coords = false
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+scale_amount = 7.0
+scale_amount_curve = SubResource( 2 )
+color = Color( 0.0784314, 1, 0, 1 )
+
+[node name="Thrust Particles" type="CPUParticles2D" parent="HopeShip"]
+visible = false
+emitting = false
+amount = 60
+local_coords = false
+direction = Vector2( 0, 1 )
+spread = 14.04
+gravity = Vector2( 0, 0 )
+initial_velocity = 75.28
+initial_velocity_random = 0.25
+angular_velocity = 61.94
+angular_velocity_random = 0.32
+scale_amount = 3.0
+color_ramp = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="HopeShip"]
+scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 6 )
+
 [node name="PauseMenu" type="Node2D" parent="."]
+pause_mode = 2
 visible = false
 script = ExtResource( 1 )
 
 [node name="PauseMenuBackground" type="ColorRect" parent="PauseMenu"]
-margin_right = 1068.0
-margin_bottom = 621.0
+margin_left = -1920.0
+margin_top = -1080.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 color = Color( 0.470588, 0.470588, 0.470588, 0.439216 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BackToGame" type="Button" parent="PauseMenu"]
-margin_left = 334.743
-margin_top = 65.3156
-margin_right = 667.743
-margin_bottom = 143.316
+margin_left = -166.838
+margin_top = -250.456
+margin_right = 166.162
+margin_bottom = -172.455
 text = "Back To The Future"
 script = ExtResource( 2 )
 __meta__ = {
@@ -41,17 +96,14 @@ __meta__ = {
 }
 
 [node name="BackToMainMenu" type="Button" parent="PauseMenu"]
-margin_left = 334.743
-margin_top = 171.454
-margin_right = 667.743
-margin_bottom = 249.454
+margin_left = -166.269
+margin_top = -148.002
+margin_right = 166.731
+margin_bottom = -70.0018
 text = "Return to Main Menu"
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource( 5 )
 [connection signal="pressed" from="PauseMenu/BackToGame" to="PauseMenu/BackToGame" method="_on_BackToGame_pressed"]
 [connection signal="pressed" from="PauseMenu/BackToMainMenu" to="PauseMenu/BackToMainMenu" method="_on_BackToMainMenu_pressed"]

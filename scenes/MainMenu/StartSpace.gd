@@ -28,7 +28,6 @@ func _process(delta):
 			get_parent().get_node("ExitGame").select_button()
 	elif self.button_blocked >= 0:
 		self.button_blocked -= delta
-		print(self.button_blocked)
 
 
 func _on_StartSpace_pressed():

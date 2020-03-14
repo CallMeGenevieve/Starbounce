@@ -19,3 +19,4 @@ func _ready():
 func _on_BackToGame_pressed():
 	self.get_parent().hide()
 	self.get_parent().hidden = true
+	get_tree().paused = false
