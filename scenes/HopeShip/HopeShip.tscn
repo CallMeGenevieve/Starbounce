@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/hope_ship.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Space/KinematicBody2D.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Space/Camera2D.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), -0.85, 0.0, 0, 0 ]
+
+[node name="HopeShip" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 3 )
+
+[node name="Positional Particles" type="CPUParticles2D" parent="."]
+amount = 24
+lifetime = 8.0
+local_coords = false
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+scale_amount = 7.0
+scale_amount_curve = SubResource( 2 )
+color = Color( 0.0784314, 1, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 1 )

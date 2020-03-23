@@ -1,55 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Space/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Space/BackToGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Space/BackToMainMenu.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Space/Space.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Space/Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://textures/hope_ship.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Space/KinematicBody2D.gd" type="Script" id=7]
-
-[sub_resource type="CircleShape2D" id=1]
-
-[sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), -0.85, 0.0, 0, 0 ]
+[ext_resource path="res://scenes/HopeShip/HopeShip.tscn" type="PackedScene" id=5]
 
 [node name="Space" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="HopeShip" type="KinematicBody2D" parent="."]
-script = ExtResource( 7 )
-
-[node name="SpaceBackground" type="ColorRect" parent="HopeShip"]
-margin_left = -2000.0
-margin_top = -2000.0
-margin_right = 2000.0
-margin_bottom = 2000.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HopeShip"]
-shape = SubResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="HopeShip"]
-current = true
-script = ExtResource( 5 )
-
-[node name="Positional Particles" type="CPUParticles2D" parent="HopeShip"]
-amount = 24
-lifetime = 8.0
-local_coords = false
-direction = Vector2( 0, 0 )
-spread = 0.0
-gravity = Vector2( 0, 0 )
-scale_amount = 7.0
-scale_amount_curve = SubResource( 2 )
-color = Color( 0.0784314, 1, 0, 1 )
-
-[node name="Sprite" type="Sprite" parent="HopeShip"]
-scale = Vector2( 0.075, 0.075 )
-texture = ExtResource( 6 )
+[node name="HopeShip" parent="." instance=ExtResource( 5 )]
 
 [node name="PauseMenu" type="Node2D" parent="."]
 pause_mode = 2
