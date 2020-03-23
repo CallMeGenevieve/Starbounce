@@ -12,7 +12,6 @@ func _ready():
 	pass # Replace with function body.
 
 func select_button():
-	print("Start Planet")
 	self.button_selected = true
 	self.button_blocked = .2
 	self.grab_focus()

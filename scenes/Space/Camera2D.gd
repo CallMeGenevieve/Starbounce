@@ -13,4 +13,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("zoom_out"):
+		if self.zoom.x < 16:
+			self.zoom.x *= 2
+			self.zoom.y *= 2
+	elif Input.is_action_just_pressed("zoom_in"):
+		self.zoom.x /= 2
+		self.zoom.y /= 2

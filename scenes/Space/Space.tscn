@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Space/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Space/BackToGame.gd" type="Script" id=2]
@@ -12,9 +12,6 @@
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), -0.85, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 0.429688, 0.0050354, 0.0050354, 1, 0, 0, 0, 1 )
 
 [node name="Space" type="Node2D"]
 script = ExtResource( 4 )
@@ -49,21 +46,6 @@ gravity = Vector2( 0, 0 )
 scale_amount = 7.0
 scale_amount_curve = SubResource( 2 )
 color = Color( 0.0784314, 1, 0, 1 )
-
-[node name="Thrust Particles" type="CPUParticles2D" parent="HopeShip"]
-visible = false
-emitting = false
-amount = 60
-local_coords = false
-direction = Vector2( 0, 1 )
-spread = 14.04
-gravity = Vector2( 0, 0 )
-initial_velocity = 75.28
-initial_velocity_random = 0.25
-angular_velocity = 61.94
-angular_velocity_random = 0.32
-scale_amount = 3.0
-color_ramp = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="HopeShip"]
 scale = Vector2( 0.075, 0.075 )

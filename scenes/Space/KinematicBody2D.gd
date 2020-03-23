@@ -9,11 +9,9 @@ export var thrust = Vector2(0, -1)
 export var angle_speed = 0
 export var direction = 0
 
-var thrust_particles = null
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.thrust_particles = get_parent().get_node("HopeShip/Thrust Particles")
+	pass
 
 
 func apply_acceleration(delta):
@@ -33,18 +31,22 @@ func apply_speed(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("accelerate_ship") and not Input.is_action_pressed("break_ship"):
-		self.direction = 1
-		self.thrust_particles.emitting = true
+		if self.direction != 1:
+			self.direction = 1
 	elif Input.is_action_pressed("break_ship") and not Input.is_action_pressed("accelerate_ship"):
 		self.direction = -1
-		self.thrust_particles.emitting = true
 	else:
 		self.direction = 0
-		self.thrust_particles.emitting = false
 	if Input.is_action_pressed("turn_ship_right"):
-		self.angle_speed += delta * 2
+		if self.angle_speed < 6:
+			self.angle_speed += delta * 2
+		elif self.angle_speed != 6:
+			self.angle_speed = 6
 	if Input.is_action_pressed("turn_ship_left"):
-		self.angle_speed -= delta * 2
+		if self.angle_speed > -6:
+			self.angle_speed -= delta * 2
+		elif self.angle_speed != -6:
+			self.angle_speed = -6
 	
 	apply_acceleration(delta)
 	apply_speed(delta)

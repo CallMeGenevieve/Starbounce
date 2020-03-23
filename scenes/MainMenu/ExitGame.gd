@@ -12,7 +12,6 @@ func _ready():
 	pass
 
 func select_button():
-	print("Exit Game")
 	self.button_selected = true
 	self.button_blocked = .2
 	self.grab_focus()
