@@ -6,7 +6,7 @@ export var gravitational_constant = 6.6743
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(self.gravitational_constant)
+	pass
 
 
 func calculate_acceleration_from_force(space_object_1, space_object_2):
