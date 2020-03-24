@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hope_ship.png-17de4bfece26e5d5941182e65acd67b1.stex"
+path="res://.import/kreis.png-41be6e5d360226c0b9e41bfd660e8ab6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Space/hope_ship.png"
-dest_files=[ "res://.import/hope_ship.png-17de4bfece26e5d5941182e65acd67b1.stex" ]
+source_file="res://textures/kreis.png"
+dest_files=[ "res://.import/kreis.png-41be6e5d360226c0b9e41bfd660e8ab6.stex" ]
 
 [params]
 

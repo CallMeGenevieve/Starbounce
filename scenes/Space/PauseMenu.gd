@@ -16,7 +16,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if self.hidden:
-			var hope_ship = get_parent().get_node("HopeShip")
+			var hope_ship = get_parent().get_node("SpaceObjects/HopeShip")
 			self.position = hope_ship.position
 			self.hidden = false
 			get_tree().paused = true
