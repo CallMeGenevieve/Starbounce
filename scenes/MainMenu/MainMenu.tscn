@@ -1,24 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/MainMenu/StartSpace.gd" type="Script" id=1]
 [ext_resource path="res://scenes/MainMenu/ExitGame.gd" type="Script" id=2]
 [ext_resource path="res://scenes/MainMenu/StartPlanet.gd" type="Script" id=3]
+[ext_resource path="res://scenes/MainMenu/MainMenu.gd" type="Script" id=4]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1055.0
-margin_bottom = 611.0
+margin_left = -2000.0
+margin_top = -2000.0
+margin_right = 2000.0
+margin_bottom = 2000.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StartSpace" type="Button" parent="."]
-margin_left = 321.0
-margin_top = 91.0
-margin_right = 708.0
-margin_bottom = 151.0
+margin_left = -193.472
+margin_top = -168.559
+margin_right = 193.528
+margin_bottom = -108.559
 text = "Start Space"
 script = ExtResource( 1 )
 __meta__ = {
@@ -27,10 +31,10 @@ __meta__ = {
 button_selected = false
 
 [node name="StartPlanet" type="Button" parent="."]
-margin_left = 321.0
-margin_top = 173.0
-margin_right = 708.0
-margin_bottom = 233.0
+margin_left = -193.472
+margin_top = -90.7087
+margin_right = 193.528
+margin_bottom = -30.7087
 disabled = true
 text = "Start Planet Test"
 script = ExtResource( 3 )
@@ -39,14 +43,17 @@ __meta__ = {
 }
 
 [node name="ExitGame" type="Button" parent="."]
-margin_left = 321.0
-margin_top = 409.769
-margin_right = 708.0
-margin_bottom = 469.769
+margin_left = -193.472
+margin_top = 58.1516
+margin_right = 193.528
+margin_bottom = 118.152
 text = "Exit Game"
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
 [connection signal="pressed" from="StartSpace" to="StartSpace" method="_on_StartSpace_pressed"]
 [connection signal="pressed" from="ExitGame" to="ExitGame" method="_on_ExitGame_pressed"]
