@@ -1,9 +1,9 @@
 extends Area2D
 
 
-export var thrust_power = 0.25
+export var thrust_power = 25
 
-export var mass = 10000
+export var mass = 1
 
 export var speed = Vector2(0, 0)
 export var acceleration = Vector2(0, 0)
@@ -21,11 +21,10 @@ func _ready():
 func apply_acceleration(delta):
 	self.rotation += self.angle_speed * delta
 	
-	if self.angle_speed != 0:
-		self.thrust.x = sin(self.rotation) * self.thrust_power
-		self.thrust.y = -cos(self.rotation) * self.thrust_power
+	self.thrust.x = sin(self.rotation) * self.thrust_power
+	self.thrust.y = -cos(self.rotation) * self.thrust_power
 	
-	self.speed += delta * self.acceleration + self.thrust * self.direction
+	self.speed += delta * self.acceleration + self.thrust * self.direction * delta
 
 
 func apply_speed(delta):
@@ -40,6 +39,7 @@ func _process(delta):
 	if Input.is_action_pressed("accelerate_ship") and not Input.is_action_pressed("break_ship"):
 		if self.direction != 1:
 			self.direction = 1
+			print("hey")
 	elif Input.is_action_pressed("break_ship") and not Input.is_action_pressed("accelerate_ship"):
 		self.direction = -1
 	else:
