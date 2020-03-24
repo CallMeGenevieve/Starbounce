@@ -18,5 +18,6 @@ func _process(delta):
 			self.zoom.x *= 2
 			self.zoom.y *= 2
 	elif Input.is_action_just_pressed("zoom_in"):
-		self.zoom.x /= 2
-		self.zoom.y /= 2
+		if self.zoom.x > 0.125:
+			self.zoom.x /= 2
+			self.zoom.y /= 2
