@@ -1,6 +1,7 @@
 extends Area2D
 
 
+export var identifyer = "HopeShip"
 export var thrust_power = 25
 
 export var mass = 1
@@ -39,7 +40,6 @@ func _process(delta):
 	if Input.is_action_pressed("accelerate_ship") and not Input.is_action_pressed("break_ship"):
 		if self.direction != 1:
 			self.direction = 1
-			print("hey")
 	elif Input.is_action_pressed("break_ship") and not Input.is_action_pressed("accelerate_ship"):
 		self.direction = -1
 	else:
