@@ -16,6 +16,7 @@ script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+smoothing_enabled = true
 script = ExtResource( 3 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]

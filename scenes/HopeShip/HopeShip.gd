@@ -20,10 +20,12 @@ func _ready():
 
 
 func apply_acceleration(delta):
-	self.rotation += self.angle_speed * delta
+	get_node("Sprite").rotation += self.angle_speed * delta
+	get_node("Positional Particles").rotation += self.angle_speed * delta
+	get_node("CollisionShape2D").rotation += self.angle_speed * delta
 	
-	self.thrust.x = sin(self.rotation) * self.thrust_power
-	self.thrust.y = -cos(self.rotation) * self.thrust_power
+	self.thrust.x = sin(get_node("Sprite").rotation) * self.thrust_power
+	self.thrust.y = -cos(get_node("Sprite").rotation) * self.thrust_power
 	
 	self.speed += delta * self.acceleration + self.thrust * self.direction * delta
 
