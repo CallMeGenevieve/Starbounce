@@ -14,6 +14,10 @@ export var direction = 0
 
 export var stay_in_place = false
 
+var index = 0
+
+signal speed_change2(new_speed)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -60,3 +64,4 @@ func _process(delta):
 
 func _on_HopeShip_area_entered(area):
 	get_tree().change_scene("res://scenes/MainMenu/MainMenu.tscn")
+

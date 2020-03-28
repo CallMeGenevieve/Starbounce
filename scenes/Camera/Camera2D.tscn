@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Camera/Camera2D.gd" type="Script" id=1]
+[ext_resource path="res://textures/static stars.png" type="Texture" id=2]
+[ext_resource path="res://textures/small stars.png" type="Texture" id=3]
+[ext_resource path="res://textures/big stars.png" type="Texture" id=4]
+
+[node name="Camera2D" type="Camera2D"]
+current = true
+smoothing_enabled = true
+script = ExtResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 2000, 2000 )
+
+[node name="Small Stars" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.167, 0.167 )
+motion_mirroring = Vector2( 2000, 2000 )
+
+[node name="Medium Stars" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.33, 0.33 )
+motion_mirroring = Vector2( 2000, 2000 )
+
+[node name="Big Stars" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 4 )
+centered = false

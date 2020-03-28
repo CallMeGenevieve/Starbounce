@@ -11,6 +11,10 @@ export var speed = Vector2()
 export var stay_in_place = false
 export var crashed = false
 
+var index
+
+signal crashing(index)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -42,6 +46,7 @@ func crash(object1, object2):
 			object1.mass += object2.mass
 			object2.crashed = true
 			get_parent().remove_child(object2)
+			emit_signal("crashing", self.index)
 
 
 func _on_SpaceObject_area_entered(area):
