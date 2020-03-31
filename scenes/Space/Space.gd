@@ -10,3 +10,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
+	if Input.is_action_just_pressed("take_screenshot"):
+		var image = get_viewport().get_texture().get_data()
+		image.flip_y()
+		image.save_png("screenshot.png")
