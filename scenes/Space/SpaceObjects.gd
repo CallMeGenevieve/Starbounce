@@ -51,6 +51,7 @@ func _process(delta):
 			self.active_camera_index = 0
 		else:
 			self.all_space_objects[self.active_camera_index - 1].get_node("Camera2D").current = false
+			self.all_space_objects[self.active_camera_index - 1].get_node("Camera2D/").current = false
 			self.all_space_objects[self.active_camera_index].get_node("Camera2D").current = true
 	for blah in range(self.game_speed):
 		var index = 0

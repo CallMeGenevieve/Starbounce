@@ -41,5 +41,6 @@ texture = ExtResource( 1 )
 shape = SubResource( 4 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( -0.698364, 0 )
 current = false
 [connection signal="area_entered" from="." to="." method="_on_SpaceObject_area_entered"]

@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 
 # Declare member variables here. Examples:
@@ -7,21 +7,23 @@ extends Node2D
 
 export var hidden = true
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	self.hide()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if self.hidden:
-			var hope_ship = get_parent().get_node("SpaceObjects/HopeShip")
-			self.position = hope_ship.position
 			self.hidden = false
 			get_tree().paused = true
-			self.show()
+			for element in self.get_children():
+				element.show()
 		else:
-			self.hide()
+			for element in self.get_children():
+				element.hide()
 			get_tree().paused = false
 			self.hidden = true
+	elif Input.is_action_just_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+	elif Input.is_action_just_pressed("take_screenshot"):
+		var image = get_viewport().get_texture().get_data()
+		image.flip_y()
+		image.save_png("screenshot.png")

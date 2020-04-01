@@ -16,12 +16,6 @@ export var stay_in_place = false
 
 var index = 0
 
-signal speed_change2(new_speed)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
 
 func apply_acceleration(delta):
 	get_node("Sprite").rotation += self.angle_speed * delta
@@ -31,15 +25,36 @@ func apply_acceleration(delta):
 	self.thrust.x = sin(get_node("Sprite").rotation) * self.thrust_power
 	self.thrust.y = -cos(get_node("Sprite").rotation) * self.thrust_power
 	
-	self.speed += delta * self.acceleration + self.thrust * self.direction * delta
+	self.acceleration += self.thrust * self.direction
+	
+	self.speed += delta * self.acceleration
 
 
 func apply_speed(delta):
 	self.position += delta * self.speed
 
+
 func apply_tick(delta):
 	apply_acceleration(delta)
 	apply_speed(delta)
+	
+	# I know this code is duplicate but idk what a better solution would be.
+	# Is there a possibility of importing functions here?!
+	if $Camera2D.current:
+		if not $Camera2D.show_ui:
+			$Camera2D/UI.get_child(0).show()
+			$Camera2D.show_ui = true
+		$Camera2D/UI/UIBox/VBoxContainer/Mass.text = "Mass: " + str(self.mass)
+		$Camera2D/UI/UIBox/VBoxContainer/PosX.text = "PosX: " + str(self.position.x)
+		$Camera2D/UI/UIBox/VBoxContainer/PosY.text = "PosY: " + str(self.position.y)
+		$Camera2D/UI/UIBox/VBoxContainer/Speed.text = "Speed: " + str(self.speed.length())
+		$Camera2D/UI/UIBox/VBoxContainer/SpeedAxis.text = "SpeedX: " + str(self.speed.x) + " SpeedY: " + str(self.speed.y)
+		$Camera2D/UI/UIBox/VBoxContainer/Acceleration.text = "Acceleration: " + str(self.acceleration.length())
+		$Camera2D/UI/UIBox/VBoxContainer/AccAxis.text = "AccelX: " + str(self.acceleration.x) + " AccelY: " + str(self.acceleration.y)
+
+	elif $Camera2D.show_ui:
+		$Camera2D/UI.get_child(0).hide()
+		$Camera2D.show_ui = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,0 +1,53 @@
+[gd_scene format=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UIBox" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIBox"]
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 118.0
+margin_bottom = 132.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mass" type="Label" parent="UIBox/VBoxContainer"]
+margin_right = 113.0
+margin_bottom = 14.0
+
+[node name="PosX" type="Label" parent="UIBox/VBoxContainer"]
+margin_top = 18.0
+margin_right = 113.0
+margin_bottom = 32.0
+
+[node name="PosY" type="Label" parent="UIBox/VBoxContainer"]
+margin_top = 36.0
+margin_right = 113.0
+margin_bottom = 50.0
+
+[node name="Speed" type="Label" parent="UIBox/VBoxContainer"]
+margin_top = 54.0
+margin_right = 113.0
+margin_bottom = 68.0
+
+[node name="SpeedAxis" type="Label" parent="UIBox/VBoxContainer"]
+margin_top = 72.0
+margin_right = 113.0
+margin_bottom = 86.0
+
+[node name="Acceleration" type="Label" parent="UIBox/VBoxContainer"]
+margin_top = 90.0
+margin_right = 113.0
+margin_bottom = 104.0
+
+[node name="AccAxis" type="Label" parent="UIBox/VBoxContainer"]
+margin_top = 108.0
+margin_right = 113.0
+margin_bottom = 122.0

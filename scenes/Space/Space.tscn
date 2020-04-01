@@ -22,44 +22,56 @@ gravity_distance_scale = 1.0
 position = Vector2( -100, -100 )
 scale = Vector2( 4, 4 )
 mass = 40000
-stay_in_place = true
 
 [node name="PauseMenu" type="Node2D" parent="."]
 pause_mode = 2
-visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PauseMenu"]
 script = ExtResource( 1 )
 
-[node name="PauseMenuBackground" type="ColorRect" parent="PauseMenu"]
-margin_left = -1920.0
-margin_top = -1080.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="PauseMenuBackground" type="ColorRect" parent="PauseMenu/CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.470588, 0.470588, 0.470588, 0.439216 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackToGame" type="Button" parent="PauseMenu"]
-margin_left = -166.838
-margin_top = -250.456
-margin_right = 166.162
-margin_bottom = -172.455
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -213.0
+margin_right = 213.0
+rect_min_size = Vector2( 100, 200 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToGame" type="Button" parent="PauseMenu/CanvasLayer/VBoxContainer"]
+margin_top = 248.0
+margin_right = 426.0
+margin_bottom = 298.0
+rect_min_size = Vector2( 0, 50 )
 text = "Back To The Future"
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackToMainMenu" type="Button" parent="PauseMenu"]
-margin_left = -166.269
-margin_top = -148.002
-margin_right = 166.731
-margin_bottom = -70.0018
+[node name="BackToMainMenu" type="Button" parent="PauseMenu/CanvasLayer/VBoxContainer"]
+margin_top = 302.0
+margin_right = 426.0
+margin_bottom = 352.0
+rect_min_size = Vector2( 0, 50 )
 text = "Return to Main Menu"
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="crashing" from="SpaceObjects/SpaceObject" to="SpaceObjects" method="_on_SpaceObject_crashing"]
-[connection signal="pressed" from="PauseMenu/BackToGame" to="PauseMenu/BackToGame" method="_on_BackToGame_pressed"]
-[connection signal="pressed" from="PauseMenu/BackToMainMenu" to="PauseMenu/BackToMainMenu" method="_on_BackToMainMenu_pressed"]
+[connection signal="pressed" from="PauseMenu/CanvasLayer/VBoxContainer/BackToGame" to="PauseMenu/CanvasLayer/VBoxContainer/BackToGame" method="_on_BackToGame_pressed"]
+[connection signal="pressed" from="PauseMenu/CanvasLayer/VBoxContainer/BackToMainMenu" to="PauseMenu/CanvasLayer/VBoxContainer/BackToMainMenu" method="_on_BackToMainMenu_pressed"]

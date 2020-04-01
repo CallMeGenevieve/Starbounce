@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Camera/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://textures/static stars.png" type="Texture" id=2]
 [ext_resource path="res://textures/small stars.png" type="Texture" id=3]
 [ext_resource path="res://textures/big stars.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Camera/UI.tscn" type="PackedScene" id=5]
 
 [node name="Camera2D" type="Camera2D"]
 current = true
@@ -36,3 +37,5 @@ motion_mirroring = Vector2( 2000, 2000 )
 [node name="Big Stars" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
 texture = ExtResource( 4 )
 centered = false
+
+[node name="UI" parent="." instance=ExtResource( 5 )]
