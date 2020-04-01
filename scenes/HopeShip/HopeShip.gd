@@ -80,3 +80,7 @@ func _process(delta):
 func _on_HopeShip_area_entered(area):
 	get_tree().change_scene("res://scenes/MainMenu/MainMenu.tscn")
 
+
+func _on_OptionsButton_pressed():
+	var color = $"Positional Particles".color
+	# TODO: Connect to options menu

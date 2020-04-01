@@ -5,3 +5,11 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
+
+
+func _on_OptionsButton_pressed():
+	$PauseMenu/CanvasLayer/Control.show_menu($"SpaceObjects/HopeShip/Positional Particles".color)
+
+
+func _on_Control_apply_settings(ship_trail_color):
+	$"SpaceObjects/HopeShip/Positional Particles".color = ship_trail_color

@@ -14,8 +14,8 @@ func _process(delta):
 		if self.hidden:
 			self.hidden = false
 			get_tree().paused = true
-			for element in self.get_children():
-				element.show()
+			$PauseMenuBackground.show()
+			$VBoxContainer.show()
 		else:
 			for element in self.get_children():
 				element.hide()

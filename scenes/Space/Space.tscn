@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Space/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Space/BackToGame.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/HopeShip/HopeShip.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SpaceObject/SpaceObject.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Space/SpaceObjects.gd" type="Script" id=7]
+[ext_resource path="res://scenes/UI/Control.tscn" type="PackedScene" id=8]
 
 [node name="Space" type="Node2D"]
 script = ExtResource( 4 )
@@ -52,9 +53,9 @@ __meta__ = {
 }
 
 [node name="BackToGame" type="Button" parent="PauseMenu/CanvasLayer/VBoxContainer"]
-margin_top = 248.0
+margin_top = 221.0
 margin_right = 426.0
-margin_bottom = 298.0
+margin_bottom = 271.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back To The Future"
 script = ExtResource( 2 )
@@ -62,16 +63,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackToMainMenu" type="Button" parent="PauseMenu/CanvasLayer/VBoxContainer"]
-margin_top = 302.0
+[node name="OptionsButton" type="Button" parent="PauseMenu/CanvasLayer/VBoxContainer"]
+margin_top = 275.0
 margin_right = 426.0
-margin_bottom = 352.0
+margin_bottom = 325.0
+rect_min_size = Vector2( 0, 50 )
+text = "Options"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToMainMenu" type="Button" parent="PauseMenu/CanvasLayer/VBoxContainer"]
+margin_top = 329.0
+margin_right = 426.0
+margin_bottom = 379.0
 rect_min_size = Vector2( 0, 50 )
 text = "Return to Main Menu"
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Control" parent="PauseMenu/CanvasLayer" instance=ExtResource( 8 )]
+hint_tooltip = "Control"
 [connection signal="crashing" from="SpaceObjects/SpaceObject" to="SpaceObjects" method="_on_SpaceObject_crashing"]
 [connection signal="pressed" from="PauseMenu/CanvasLayer/VBoxContainer/BackToGame" to="PauseMenu/CanvasLayer/VBoxContainer/BackToGame" method="_on_BackToGame_pressed"]
+[connection signal="pressed" from="PauseMenu/CanvasLayer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="PauseMenu/CanvasLayer/VBoxContainer/BackToMainMenu" to="PauseMenu/CanvasLayer/VBoxContainer/BackToMainMenu" method="_on_BackToMainMenu_pressed"]
+[connection signal="apply_settings" from="PauseMenu/CanvasLayer/Control" to="." method="_on_Control_apply_settings"]

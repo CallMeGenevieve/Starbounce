@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/UI/OptionsMenu.gd" type="Script" id=1]
+
+[node name="OptionsMenu" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.294118, 0.294118, 0.294118, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_right = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 504.0
+margin_bottom = 14.0
+text = "Options"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 504.0
+margin_bottom = 118.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 43.0
+margin_right = 100.0
+margin_bottom = 57.0
+text = "Ship trail colour"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 504.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 100 )
+color = Color( 0.784314, 0.0745098, 0.933333, 1 )
+edit_alpha = false
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer"]
+margin_top = 122.0
+margin_right = 504.0
+margin_bottom = 146.0
+text = "Fullscreen"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 150.0
+margin_right = 504.0
+margin_bottom = 170.0
+alignment = 1
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 170.0
+margin_right = 224.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[node name="ApplyButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 228.0
+margin_right = 333.0
+margin_bottom = 20.0
+text = "Apply Changes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="color_changed" from="VBoxContainer/HBoxContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="toggled" from="VBoxContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ApplyButton" to="." method="_on_ApplyButton_pressed"]
