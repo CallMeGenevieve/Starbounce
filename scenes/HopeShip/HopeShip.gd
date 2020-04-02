@@ -15,6 +15,11 @@ export var direction = 0
 export var stay_in_place = false
 
 var index = 0
+var ui_node
+
+
+func _ready():
+	self.ui_node = get_parent().get_parent().get_node("PauseMenu/CanvasLayer/UI/VBoxContainer")
 
 
 func apply_acceleration(delta):
@@ -41,20 +46,14 @@ func apply_tick(delta):
 	# I know this code is duplicate but idk what a better solution would be.
 	# Is there a possibility of importing functions here?!
 	if $Camera2D.current:
-		if not $Camera2D.show_ui:
-			$Camera2D/UI.get_child(0).show()
-			$Camera2D.show_ui = true
-		$Camera2D/UI/UIBox/VBoxContainer/Mass.text = "Mass: " + str(self.mass)
-		$Camera2D/UI/UIBox/VBoxContainer/PosX.text = "PosX: " + str(self.position.x)
-		$Camera2D/UI/UIBox/VBoxContainer/PosY.text = "PosY: " + str(self.position.y)
-		$Camera2D/UI/UIBox/VBoxContainer/Speed.text = "Speed: " + str(self.speed.length())
-		$Camera2D/UI/UIBox/VBoxContainer/SpeedAxis.text = "SpeedX: " + str(self.speed.x) + " SpeedY: " + str(self.speed.y)
-		$Camera2D/UI/UIBox/VBoxContainer/Acceleration.text = "Acceleration: " + str(self.acceleration.length())
-		$Camera2D/UI/UIBox/VBoxContainer/AccAxis.text = "AccelX: " + str(self.acceleration.x) + " AccelY: " + str(self.acceleration.y)
+		ui_node.get_node("Mass").text = "Mass: " + str(self.mass)
+		ui_node.get_node("PosX").text = "PosX: " + str(self.position.x)
+		ui_node.get_node("PosY").text = "PosY: " + str(self.position.y)
+		ui_node.get_node("Speed").text = "Speed: " + str(self.speed.length())
+		ui_node.get_node("SpeedAxis").text = "SpeedX: " + str(self.speed.x) + " SpeedY: " + str(self.speed.y)
+		ui_node.get_node("Acceleration").text = "Acceleration: " + str(self.acceleration.length())
+		ui_node.get_node("AccAxis").text = "AccelX: " + str(self.acceleration.x) + " AccelY: " + str(self.acceleration.y)
 
-	elif $Camera2D.show_ui:
-		$Camera2D/UI.get_child(0).hide()
-		$Camera2D.show_ui = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

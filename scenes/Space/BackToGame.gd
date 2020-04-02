@@ -17,8 +17,8 @@ func _ready():
 
 
 func _on_BackToGame_pressed():
-	for element in self.get_parent().get_parent().get_children():
-		element.hide()
+	get_parent().get_parent().get_node("VBoxContainer").hide()
+	get_parent().get_parent().get_node("PauseMenuBackground").hide()
 	
 	get_parent().get_parent().hidden = true
 	get_tree().paused = false

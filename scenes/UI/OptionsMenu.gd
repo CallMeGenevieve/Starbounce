@@ -37,6 +37,7 @@ func _on_CheckBox_toggled(button_pressed):
 
 func _on_Cancel_pressed():
 	self.hide()
+	self.hidden = true
 
 
 func _on_ApplyButton_pressed():

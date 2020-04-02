@@ -17,8 +17,8 @@ func _process(delta):
 			$PauseMenuBackground.show()
 			$VBoxContainer.show()
 		else:
-			for element in self.get_children():
-				element.hide()
+			$PauseMenuBackground.hide()
+			$VBoxContainer.hide()
 			get_tree().paused = false
 			self.hidden = true
 	elif Input.is_action_just_pressed("toggle_fullscreen"):
