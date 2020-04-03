@@ -17,10 +17,7 @@ func _process(delta):
 			$PauseMenuBackground.show()
 			$VBoxContainer.show()
 		else:
-			$PauseMenuBackground.hide()
-			$VBoxContainer.hide()
-			get_tree().paused = false
-			self.hidden = true
+			$VBoxContainer/BackToGame._on_BackToGame_pressed()
 	elif Input.is_action_just_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 	elif Input.is_action_just_pressed("take_screenshot"):

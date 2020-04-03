@@ -8,21 +8,33 @@
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -2000.0
-margin_top = -2000.0
-margin_right = 2000.0
-margin_bottom = 2000.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartSpace" type="Button" parent="."]
-margin_left = -193.472
-margin_top = -168.559
-margin_right = 193.528
-margin_bottom = -108.559
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -252.5
+margin_top = -79.0
+margin_right = 252.5
+margin_bottom = 79.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartSpace" type="Button" parent="CanvasLayer/VBoxContainer"]
+margin_right = 505.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 text = "Start Space"
 script = ExtResource( 1 )
 __meta__ = {
@@ -30,11 +42,11 @@ __meta__ = {
 }
 button_selected = false
 
-[node name="StartPlanet" type="Button" parent="."]
-margin_left = -193.472
-margin_top = -90.7087
-margin_right = 193.528
-margin_bottom = -30.7087
+[node name="StartPlanet" type="Button" parent="CanvasLayer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 505.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 50 )
 disabled = true
 text = "Start Planet Test"
 script = ExtResource( 3 )
@@ -42,18 +54,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitGame" type="Button" parent="."]
-margin_left = -193.472
-margin_top = 58.1516
-margin_right = 193.528
-margin_bottom = 118.152
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 505.0
+margin_bottom = 133.0
+rect_min_size = Vector2( 0, 25 )
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitGame" type="Button" parent="CanvasLayer/VBoxContainer"]
+margin_top = 137.0
+margin_right = 505.0
+margin_bottom = 187.0
+rect_min_size = Vector2( 0, 50 )
 text = "Exit Game"
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-[connection signal="pressed" from="StartSpace" to="StartSpace" method="_on_StartSpace_pressed"]
-[connection signal="pressed" from="ExitGame" to="ExitGame" method="_on_ExitGame_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/StartSpace" to="CanvasLayer/VBoxContainer/StartSpace" method="_on_StartSpace_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ExitGame" to="CanvasLayer/VBoxContainer/ExitGame" method="_on_ExitGame_pressed"]
