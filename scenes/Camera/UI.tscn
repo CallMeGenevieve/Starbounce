@@ -1,8 +1,13 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/UI/UI.gd" type="Script" id=1]
 
 [node name="UIBox" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.22778
+margin_right = -1.22778
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -49,3 +54,263 @@ margin_bottom = 104.0
 margin_top = 108.0
 margin_right = 113.0
 margin_bottom = 122.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -129.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EditSpaceButton" type="MenuButton" parent="HBoxContainer"]
+margin_right = 77.0
+margin_bottom = 20.0
+text = "Edit Space"
+items = [ "Create Planet", null, 0, false, false, 0, 0, null, "", false, "Edit Planet", null, 0, false, false, 1, 0, null, "", false ]
+
+[node name="AccessPauseMenuButton" type="Button" parent="HBoxContainer"]
+margin_left = 81.0
+margin_right = 129.0
+margin_bottom = 20.0
+text = "Menu"
+
+[node name="PlanetEditor" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -207.0
+margin_top = -154.0
+margin_bottom = 154.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetEditor"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 200.0
+margin_bottom = 301.0
+
+[node name="TitleLabel" type="Label" parent="PlanetEditor/VBoxContainer"]
+margin_right = 193.0
+margin_bottom = 14.0
+text = "Planet Editor"
+align = 1
+valign = 1
+
+[node name="ObjectNameEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 18.0
+margin_right = 193.0
+margin_bottom = 42.0
+
+[node name="ObjectNameLabel" type="Label" parent="PlanetEditor/VBoxContainer/ObjectNameEdit"]
+margin_top = 5.0
+margin_right = 89.0
+margin_bottom = 19.0
+text = "Object Name:"
+
+[node name="ObjectName" type="LineEdit" parent="PlanetEditor/VBoxContainer/ObjectNameEdit"]
+margin_left = 93.0
+margin_right = 193.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+max_length = 24
+clear_button_enabled = true
+placeholder_text = "Planet"
+caret_blink = true
+
+[node name="ObjectMassEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 46.0
+margin_right = 193.0
+margin_bottom = 70.0
+
+[node name="MassLabel" type="Label" parent="PlanetEditor/VBoxContainer/ObjectMassEdit"]
+margin_top = 5.0
+margin_right = 37.0
+margin_bottom = 19.0
+text = "Mass:"
+
+[node name="Mass" type="SpinBox" parent="PlanetEditor/VBoxContainer/ObjectMassEdit"]
+margin_left = 41.0
+margin_right = 141.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+hint_tooltip = "Allows values between 0 and 1000000"
+max_value = 1e+06
+value = 40000.0
+rounded = true
+align = 2
+
+[node name="ScaleEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 74.0
+margin_right = 193.0
+margin_bottom = 90.0
+
+[node name="ScaleLabel" type="Label" parent="PlanetEditor/VBoxContainer/ScaleEdit"]
+margin_top = 1.0
+margin_right = 37.0
+margin_bottom = 15.0
+text = "Scale:"
+
+[node name="Scale" type="HSlider" parent="PlanetEditor/VBoxContainer/ScaleEdit"]
+margin_left = 41.0
+margin_right = 191.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 150, 0 )
+min_value = 0.5
+max_value = 10.0
+step = 0.5
+value = 1.0
+tick_count = 2
+
+[node name="TrailColourEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 94.0
+margin_right = 193.0
+margin_bottom = 114.0
+
+[node name="Label" type="Label" parent="PlanetEditor/VBoxContainer/TrailColourEdit"]
+margin_top = 3.0
+margin_right = 72.0
+margin_bottom = 17.0
+text = "Trail Colour"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="PlanetEditor/VBoxContainer/TrailColourEdit"]
+margin_left = 76.0
+margin_right = 126.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 0, 0, 1, 1 )
+edit_alpha = false
+
+[node name="StaticEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 118.0
+margin_right = 193.0
+margin_bottom = 158.0
+
+[node name="StaticBox" type="CheckButton" parent="PlanetEditor/VBoxContainer/StaticEdit"]
+margin_right = 119.0
+margin_bottom = 40.0
+hint_tooltip = "If ON, the planet will not be affected by gravity and cannot crash."
+text = "Static:"
+
+[node name="PosXEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 162.0
+margin_right = 193.0
+margin_bottom = 186.0
+
+[node name="PosXLabel" type="Label" parent="PlanetEditor/VBoxContainer/PosXEdit"]
+margin_top = 5.0
+margin_right = 68.0
+margin_bottom = 19.0
+text = "Position X:"
+
+[node name="PosX" type="SpinBox" parent="PlanetEditor/VBoxContainer/PosXEdit"]
+margin_left = 72.0
+margin_right = 146.0
+margin_bottom = 24.0
+min_value = -1e+06
+max_value = 1e+06
+rounded = true
+
+[node name="PosYEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 190.0
+margin_right = 193.0
+margin_bottom = 214.0
+
+[node name="PosYLabel" type="Label" parent="PlanetEditor/VBoxContainer/PosYEdit"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 19.0
+text = "Position Y:"
+
+[node name="PosY" type="SpinBox" parent="PlanetEditor/VBoxContainer/PosYEdit"]
+margin_left = 71.0
+margin_right = 145.0
+margin_bottom = 24.0
+min_value = -1e+06
+max_value = 1e+06
+rounded = true
+
+[node name="SpeedXEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 218.0
+margin_right = 193.0
+margin_bottom = 242.0
+
+[node name="SpeedXLabel" type="Label" parent="PlanetEditor/VBoxContainer/SpeedXEdit"]
+margin_top = 5.0
+margin_right = 55.0
+margin_bottom = 19.0
+text = "Speed X:"
+
+[node name="SpeedX" type="SpinBox" parent="PlanetEditor/VBoxContainer/SpeedXEdit"]
+margin_left = 59.0
+margin_right = 133.0
+margin_bottom = 24.0
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+
+[node name="SpeedYEdit" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 246.0
+margin_right = 193.0
+margin_bottom = 270.0
+
+[node name="SpeedYLabel" type="Label" parent="PlanetEditor/VBoxContainer/SpeedYEdit"]
+margin_top = 5.0
+margin_right = 54.0
+margin_bottom = 19.0
+text = "Speed Y:"
+
+[node name="SpeedY" type="SpinBox" parent="PlanetEditor/VBoxContainer/SpeedYEdit"]
+margin_left = 58.0
+margin_right = 132.0
+margin_bottom = 24.0
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+
+[node name="Buttons" type="HBoxContainer" parent="PlanetEditor/VBoxContainer"]
+margin_top = 274.0
+margin_right = 193.0
+margin_bottom = 294.0
+alignment = 1
+
+[node name="ApplyButton" type="Button" parent="PlanetEditor/VBoxContainer/Buttons"]
+margin_left = 43.0
+margin_right = 91.0
+margin_bottom = 20.0
+text = "Apply"
+
+[node name="DeleteButton" type="Button" parent="PlanetEditor/VBoxContainer/Buttons"]
+margin_left = 95.0
+margin_right = 150.0
+margin_bottom = 20.0
+text = "Delete"
+
+[node name="CantDeleteHopeNotification" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.5
+margin_top = -29.0
+margin_right = 109.5
+margin_bottom = 29.0
+popup_exclusive = true
+window_title = "CAUTION"
+dialog_text = "You can't delete the space ship!"
+[connection signal="pressed" from="HBoxContainer/AccessPauseMenuButton" to="." method="_on_AccessPauseMenuButton_pressed"]
+[connection signal="value_changed" from="PlanetEditor/VBoxContainer/ObjectMassEdit/Mass" to="." method="_on_Mass_value_changed"]
+[connection signal="value_changed" from="PlanetEditor/VBoxContainer/ScaleEdit/Scale" to="." method="_on_Scale_value_changed"]
+[connection signal="color_changed" from="PlanetEditor/VBoxContainer/TrailColourEdit/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="toggled" from="PlanetEditor/VBoxContainer/StaticEdit/StaticBox" to="." method="_on_StaticBox_toggled"]
+[connection signal="value_changed" from="PlanetEditor/VBoxContainer/PosXEdit/PosX" to="." method="_on_PosX_value_changed"]
+[connection signal="value_changed" from="PlanetEditor/VBoxContainer/PosYEdit/PosY" to="." method="_on_PosY_value_changed"]
+[connection signal="value_changed" from="PlanetEditor/VBoxContainer/SpeedXEdit/SpeedX" to="." method="_on_SpeedX_value_changed"]
+[connection signal="value_changed" from="PlanetEditor/VBoxContainer/SpeedYEdit/SpeedY" to="." method="_on_SpeedY_value_changed"]
+[connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/ApplyButton" to="." method="_on_ApplyButton_pressed"]
+[connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="confirmed" from="CantDeleteHopeNotification" to="." method="_on_CantDeleteHopeNotification_confirmed"]

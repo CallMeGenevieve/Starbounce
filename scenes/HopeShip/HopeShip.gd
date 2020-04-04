@@ -16,10 +16,12 @@ export var stay_in_place = false
 
 var index = 0
 var ui_node
+var positional_particles
 
 
 func _ready():
 	self.ui_node = get_parent().get_parent().get_node("PauseMenu/CanvasLayer/UI/VBoxContainer")
+	self.positional_particles = $"Positional Particles"
 
 
 func apply_acceleration(delta):
@@ -57,29 +59,37 @@ func apply_tick(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("accelerate_ship") and not Input.is_action_pressed("break_ship"):
-		if self.direction != 1:
-			self.direction = 1
-	elif Input.is_action_pressed("break_ship") and not Input.is_action_pressed("accelerate_ship"):
-		self.direction = -1
-	else:
-		self.direction = 0
-	if Input.is_action_pressed("turn_ship_right"):
-		if self.angle_speed < 6:
-			self.angle_speed += delta * 2
-		elif self.angle_speed != 6:
-			self.angle_speed = 6
-	if Input.is_action_pressed("turn_ship_left"):
-		if self.angle_speed > -6:
-			self.angle_speed -= delta * 2
-		elif self.angle_speed != -6:
-			self.angle_speed = -6
+	if not get_parent().simulation_paused:
+		if Input.is_action_pressed("accelerate_ship") and not Input.is_action_pressed("break_ship"):
+			if self.direction != 1:
+				self.direction = 1
+		elif Input.is_action_pressed("break_ship") and not Input.is_action_pressed("accelerate_ship"):
+			self.direction = -1
+		else:
+			self.direction = 0
+		if Input.is_action_pressed("turn_ship_right"):
+			if self.angle_speed < 6:
+				self.angle_speed += delta * 2
+			elif self.angle_speed != 6:
+				self.angle_speed = 6
+		if Input.is_action_pressed("turn_ship_left"):
+			if self.angle_speed > -6:
+				self.angle_speed -= delta * 2
+			elif self.angle_speed != -6:
+				self.angle_speed = -6
 
 
 func _on_HopeShip_area_entered(area):
-	get_tree().change_scene("res://scenes/MainMenu/MainMenu.tscn")
+	if get_parent().edit_mode == 0:
+		get_tree().change_scene("res://scenes/MainMenu/MainMenu.tscn")
 
 
-func _on_OptionsButton_pressed():
-	var color = $"Positional Particles".color
-	# TODO: Connect to options menu
+func set_trail_colour(colour):
+	$"Positional Particles".process_material.color = colour
+
+
+func change_particle_tick(game_speed, simulation_paused):
+	if simulation_paused:
+		$"Positional Particles".speed_scale = 0
+	else:
+		$"Positional Particles".speed_scale = game_speed

@@ -13,12 +13,15 @@ export var crashed = false
 
 var index
 var ui_node
+var positional_particles
 
 signal crashing(index)
 
 
 func _ready():
+	$"Positional Particles".process_material = ($"Positional Particles".process_material.duplicate())
 	self.ui_node = get_parent().get_parent().get_node("PauseMenu/CanvasLayer/UI/VBoxContainer")
+	self.positional_particles = $"Positional Particles"
 
 
 func apply_acceleration(delta):
@@ -57,15 +60,31 @@ func crash(object1, object2):
 				object1.position = (object1.position * object1.mass + object2.position * object2.mass) / (object1.mass + object2.mass)
 			object1.mass += object2.mass
 			object2.crashed = true
-			get_parent().remove_child(object2)
-			emit_signal("crashing", self.index)
+			self.remove_space_object(object2)
+
+
+func remove_space_object(object):
+	emit_signal("crashing", self.index)
+	get_parent().remove_child(object)
 
 
 func _on_SpaceObject_area_entered(area):
-	if self.stay_in_place:
-		crash(self, area)
-	else:
-		if self.mass > area.mass:
+	if get_parent().edit_mode == 0:
+		if self.stay_in_place:
 			crash(self, area)
 		else:
-			crash(area, self)
+			if self.mass > area.mass:
+				crash(self, area)
+			else:
+				crash(area, self)
+
+
+func set_trail_colour(colour):
+	$"Positional Particles".process_material.color = colour
+
+
+func change_particle_tick(game_speed, simulation_paused):
+	if simulation_paused:
+		$"Positional Particles".speed_scale = 0
+	else:
+		$"Positional Particles".speed_scale = game_speed

@@ -12,10 +12,7 @@ export var hidden = true
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if self.hidden:
-			self.hidden = false
-			get_tree().paused = true
-			$PauseMenuBackground.show()
-			$VBoxContainer.show()
+			$UI._on_AccessPauseMenuButton_pressed()
 		else:
 			$VBoxContainer/BackToGame._on_BackToGame_pressed()
 	elif Input.is_action_just_pressed("toggle_fullscreen"):
