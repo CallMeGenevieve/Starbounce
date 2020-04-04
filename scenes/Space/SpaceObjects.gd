@@ -111,11 +111,6 @@ func create_space_object():
 	return scene_instance
 
 
-func _on_SpaceObject_crashing(index):
-	self.get_space_objects()
-	self.active_camera_index -= 1
-	manage_camera()
-
 func apply_simulation_speed_on_particles():
 	self.get_space_objects()
 	for space_object in self.all_space_objects:

@@ -64,8 +64,14 @@ func crash(object1, object2):
 
 
 func remove_space_object(object):
-	get_parent().active_camera_index -= 1
-	get_parent().manage_camera()
+	print(str(object.index) + " " + str(get_parent().active_camera_index))
+	
+	if object.index == get_parent().active_camera_index:
+		get_parent().active_camera_index -= 1
+		get_parent().manage_camera()
+	elif object.index < get_parent().active_camera_index:
+		get_parent().active_camera_index -= 1
+#		get_parent().manage_camera()
 	get_parent().remove_child(object)
 	
 

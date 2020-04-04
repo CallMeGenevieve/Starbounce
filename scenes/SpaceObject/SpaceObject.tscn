@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/Camera/Camera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/SpaceObject/Positional Particles.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 
 [node name="SpaceObject" type="Area2D"]
 gravity_point = true
@@ -19,7 +19,7 @@ scale = Vector2( 0.031, 0.031 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( -0.698364, 0 )
