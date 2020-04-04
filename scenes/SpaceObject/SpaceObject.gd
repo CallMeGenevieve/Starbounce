@@ -64,8 +64,10 @@ func crash(object1, object2):
 
 
 func remove_space_object(object):
-	emit_signal("crashing", self.index)
+	get_parent().active_camera_index -= 1
+	get_parent().manage_camera()
 	get_parent().remove_child(object)
+	
 
 
 func _on_SpaceObject_area_entered(area):

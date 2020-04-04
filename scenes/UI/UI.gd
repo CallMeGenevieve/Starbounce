@@ -29,11 +29,21 @@ func _on_edit_space_item_pressed(item_id):
 		space_objects.simulation_paused = true
 		space_objects.edit_mode = 1
 		current_space_object = space_objects.create_space_object()
+		self.init_editor(
+			current_space_object.mass,
+			current_space_object.scale.x,
+			current_space_object.positional_particles.process_material.color,
+			current_space_object.stay_in_place,
+			current_space_object.position,
+			current_space_object.speed
+		)
+		space_objects.apply_simulation_speed_on_particles()
 		$PlanetEditor.show()
 	elif item_text == "Edit Planet":
 		space_objects.simulation_paused = true
 		space_objects.edit_mode = 2
 		current_space_object = space_objects.all_space_objects[space_objects.active_camera_index]
+		space_objects.apply_simulation_speed_on_particles()
 		self.init_editor(
 			current_space_object.mass,
 			current_space_object.scale.x,
@@ -96,6 +106,7 @@ func _on_DeleteButton_pressed():
 func _on_ApplyButton_pressed():
 	get_parent().get_parent().get_parent().get_node("SpaceObjects").simulation_paused = false
 	get_parent().get_parent().get_parent().get_node("SpaceObjects").edit_mode = 0
+	get_parent().get_parent().get_parent().get_node("SpaceObjects").apply_simulation_speed_on_particles()
 	$PlanetEditor.hide()
 
 

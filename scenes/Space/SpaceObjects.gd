@@ -50,10 +50,7 @@ func _process(delta):
 			emit_signal("speed_change", self.game_speed)
 	elif Input.is_action_just_pressed("switch_focus"):
 		self.active_camera_index += 1
-		if self.active_camera_index >= self.amount_of_space_objects:
-			self.reset_camera_on_hopeship()
-		else:
-			self.all_space_objects[self.active_camera_index].get_node("Camera2D").current = true
+		manage_camera()
 		if self.edit_mode == 2:
 			get_parent().get_node("PauseMenu/CanvasLayer/UI").current_space_object = self.all_space_objects[self.active_camera_index]
 			get_parent().get_node("PauseMenu/CanvasLayer/UI").init_editor(
@@ -91,6 +88,13 @@ func _process(delta):
 				space_object_1.apply_tick(delta)
 
 
+func manage_camera():
+	if self.active_camera_index >= self.amount_of_space_objects:
+		self.reset_camera_on_hopeship()
+	else:
+		self.all_space_objects[self.active_camera_index].get_node("Camera2D").current = true
+
+
 func reset_camera_on_hopeship():
 	self.get_node("HopeShip/Camera2D").current = true
 	self.active_camera_index = 0
@@ -108,11 +112,11 @@ func create_space_object():
 
 
 func _on_SpaceObject_crashing(index):
-	if index == self.active_camera_index - 1:
-		self.all_space_objects[index - 1].get_node("Camera2D").current = true
-	elif index < self.active_camera_index:
-		self.active_camera_index -= 1
+	self.get_space_objects()
+	self.active_camera_index -= 1
+	manage_camera()
 
 func apply_simulation_speed_on_particles():
+	self.get_space_objects()
 	for space_object in self.all_space_objects:
 		space_object.change_particle_tick(self.game_speed, self.simulation_paused)
