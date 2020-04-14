@@ -18,6 +18,11 @@ func _ready():
 
 func get_space_objects():
 	self.all_space_objects = self.get_children()
+	
+	# If the space ship has crashed, it shouldn't be included in gravity calculations
+	if self.all_space_objects[0].crashed:
+		self.all_space_objects.erase(all_space_objects[0])
+	
 	self.amount_of_space_objects = len(all_space_objects)
 
 
@@ -90,14 +95,15 @@ func _process(delta):
 
 func manage_camera():
 	if self.active_camera_index >= self.amount_of_space_objects:
-		self.reset_camera_on_hopeship()
+		self.reset_camera()
 	else:
 		self.all_space_objects[self.active_camera_index].get_node("Camera2D").current = true
 
 
-func reset_camera_on_hopeship():
-	self.get_node("HopeShip/Camera2D").current = true
-	self.active_camera_index = 0
+func reset_camera():
+	if self.amount_of_space_objects > 0:
+		self.all_space_objects[0].get_node("Camera2D").current = true
+		self.active_camera_index = 0
 
 
 func create_space_object():

@@ -120,3 +120,15 @@ func _on_StaticBox_toggled(button_pressed):
 
 func _on_CantDeleteHopeNotification_confirmed():
 	_on_ApplyButton_pressed()
+
+
+func _on_ButtonReload_pressed():
+	get_tree().change_scene("res://scenes/Space/Space.tscn")
+
+
+func _on_ButtonMainMenu_pressed():
+	get_tree().change_scene("res://scenes/MainMenu/MainMenu.tscn")
+
+
+func _on_ButtonContinue_pressed():
+	$GameOverDialogue.hide()

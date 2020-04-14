@@ -77,6 +77,7 @@ margin_bottom = 20.0
 text = "Menu"
 
 [node name="PlanetEditor" type="PanelContainer" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -302,6 +303,60 @@ margin_bottom = 29.0
 popup_exclusive = true
 window_title = "CAUTION"
 dialog_text = "You can't delete the space ship!"
+
+[node name="GameOverDialogue" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -157.5
+margin_top = -35.5
+margin_right = 157.5
+margin_bottom = 35.5
+window_title = "Game Over!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonReload" type="Button" parent="GameOverDialogue"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = -19.0
+margin_right = 79.0
+margin_bottom = 19.0
+text = "Reload"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonMainMenu" type="Button" parent="GameOverDialogue"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.0
+margin_top = -19.0
+margin_right = 68.0
+margin_bottom = 19.0
+text = "Back To Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContinue" type="Button" parent="GameOverDialogue"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -79.0
+margin_top = -19.0
+margin_right = -10.0
+margin_bottom = 19.0
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="HBoxContainer/AccessPauseMenuButton" to="." method="_on_AccessPauseMenuButton_pressed"]
 [connection signal="value_changed" from="PlanetEditor/VBoxContainer/ObjectMassEdit/Mass" to="." method="_on_Mass_value_changed"]
 [connection signal="value_changed" from="PlanetEditor/VBoxContainer/ScaleEdit/Scale" to="." method="_on_Scale_value_changed"]
@@ -314,3 +369,6 @@ dialog_text = "You can't delete the space ship!"
 [connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/ApplyButton" to="." method="_on_ApplyButton_pressed"]
 [connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="confirmed" from="CantDeleteHopeNotification" to="." method="_on_CantDeleteHopeNotification_confirmed"]
+[connection signal="pressed" from="GameOverDialogue/ButtonReload" to="." method="_on_ButtonReload_pressed"]
+[connection signal="pressed" from="GameOverDialogue/ButtonMainMenu" to="." method="_on_ButtonMainMenu_pressed"]
+[connection signal="pressed" from="GameOverDialogue/ButtonContinue" to="." method="_on_ButtonContinue_pressed"]

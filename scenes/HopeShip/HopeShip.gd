@@ -17,6 +17,7 @@ export var stay_in_place = false
 var index = 0
 var ui_node
 var positional_particles
+var crashed = false
 
 
 func _ready():
@@ -29,8 +30,9 @@ func apply_acceleration(delta):
 	get_node("Positional Particles").rotation += self.angle_speed * delta
 	get_node("CollisionShape2D").rotation += self.angle_speed * delta
 	
-	self.thrust.x = sin(get_node("Sprite").rotation) * self.thrust_power
-	self.thrust.y = -cos(get_node("Sprite").rotation) * self.thrust_power
+	if self.direction != 0:
+		self.thrust.x = sin(get_node("Sprite").rotation) * self.thrust_power
+		self.thrust.y = -cos(get_node("Sprite").rotation) * self.thrust_power
 	
 	self.acceleration += self.thrust * self.direction
 	
@@ -59,7 +61,7 @@ func apply_tick(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not get_parent().simulation_paused:
+	if not get_parent().simulation_paused and not self.crashed:
 		if Input.is_action_pressed("accelerate_ship") and not Input.is_action_pressed("break_ship"):
 			if self.direction != 1:
 				self.direction = 1
@@ -81,7 +83,11 @@ func _process(delta):
 
 func _on_HopeShip_area_entered(area):
 	if get_parent().edit_mode == 0:
-		get_tree().change_scene("res://scenes/MainMenu/MainMenu.tscn")
+		self.crashed = true
+		hide()
+		get_parent().get_space_objects()
+		get_parent().manage_camera()
+		get_parent().get_parent().get_node("PauseMenu/CanvasLayer/UI/GameOverDialogue").show_modal(true)
 
 
 func set_trail_colour(colour):
