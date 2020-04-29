@@ -16,6 +16,7 @@ func _ready():
 	emit_signal("speed_change", self.game_speed)
 	self.get_space_objects()
 
+
 func get_space_objects():
 	self.all_space_objects = self.get_children()
 	
@@ -59,13 +60,14 @@ func _process(delta):
 		if self.edit_mode == 2:
 			get_parent().get_node("PauseMenu/CanvasLayer/UI").current_space_object = self.all_space_objects[self.active_camera_index]
 			get_parent().get_node("PauseMenu/CanvasLayer/UI").init_editor(
-			self.all_space_objects[self.active_camera_index].mass,
-			self.all_space_objects[self.active_camera_index].scale.x,
-			self.all_space_objects[self.active_camera_index].get_node("Positional Particles").process_material.color,
-			self.all_space_objects[self.active_camera_index].stay_in_place,
-			self.all_space_objects[self.active_camera_index].position,
-			self.all_space_objects[self.active_camera_index].speed
-		)
+				self.all_space_objects[self.active_camera_index].mass,
+				self.all_space_objects[self.active_camera_index].scale.x,
+				self.all_space_objects[self.active_camera_index].get_node("Positional Particles").process_material.color,
+				self.all_space_objects[self.active_camera_index].stay_in_place,
+				self.all_space_objects[self.active_camera_index].position,
+				self.all_space_objects[self.active_camera_index].speed,
+				true
+			)
 	elif Input.is_action_just_pressed("pause_simulation") and self.edit_mode == 0:
 		self.simulation_paused = !self.simulation_paused
 		apply_simulation_speed_on_particles()

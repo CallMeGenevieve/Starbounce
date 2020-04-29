@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Camera/PlanetEditor.gd" type="Script" id=2]
 
 [node name="UIBox" type="Control"]
 anchor_right = 1.0
@@ -77,7 +78,6 @@ margin_bottom = 20.0
 text = "Menu"
 
 [node name="PlanetEditor" type="PanelContainer" parent="."]
-visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -85,6 +85,7 @@ anchor_bottom = 0.5
 margin_left = -207.0
 margin_top = -154.0
 margin_bottom = 154.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -280,16 +281,22 @@ margin_bottom = 294.0
 alignment = 1
 
 [node name="ApplyButton" type="Button" parent="PlanetEditor/VBoxContainer/Buttons"]
-margin_left = 43.0
-margin_right = 91.0
+margin_left = 17.0
+margin_right = 65.0
 margin_bottom = 20.0
 text = "Apply"
 
 [node name="DeleteButton" type="Button" parent="PlanetEditor/VBoxContainer/Buttons"]
-margin_left = 95.0
-margin_right = 150.0
+margin_left = 69.0
+margin_right = 124.0
 margin_bottom = 20.0
 text = "Delete"
+
+[node name="ResetButton" type="Button" parent="PlanetEditor/VBoxContainer/Buttons"]
+margin_left = 128.0
+margin_right = 176.0
+margin_bottom = 20.0
+text = "Reset"
 
 [node name="CantDeleteHopeNotification" type="AcceptDialog" parent="."]
 anchor_left = 0.5
@@ -368,6 +375,7 @@ __meta__ = {
 [connection signal="value_changed" from="PlanetEditor/VBoxContainer/SpeedYEdit/SpeedY" to="." method="_on_SpeedY_value_changed"]
 [connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/ApplyButton" to="." method="_on_ApplyButton_pressed"]
 [connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="pressed" from="PlanetEditor/VBoxContainer/Buttons/ResetButton" to="." method="_on_ResetButton_pressed"]
 [connection signal="confirmed" from="CantDeleteHopeNotification" to="." method="_on_CantDeleteHopeNotification_confirmed"]
 [connection signal="pressed" from="GameOverDialogue/ButtonReload" to="." method="_on_ButtonReload_pressed"]
 [connection signal="pressed" from="GameOverDialogue/ButtonMainMenu" to="." method="_on_ButtonMainMenu_pressed"]
