@@ -146,6 +146,7 @@ func _on_ButtonContinue_pressed():
 func _on_ResetButton_pressed():
 	current_space_object.mass = $PlanetEditor.default_mass
 	current_space_object.scale.x = $PlanetEditor.default_scale
+	current_space_object.scale.y = $PlanetEditor.default_scale
 	current_space_object.positional_particles.process_material.color = $PlanetEditor.default_particle_color
 	current_space_object.stay_in_place = $PlanetEditor.default_behaviour
 	current_space_object.position = $PlanetEditor.default_position
