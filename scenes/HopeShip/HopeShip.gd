@@ -82,7 +82,7 @@ func _process(delta):
 
 
 func _on_HopeShip_area_entered(area):
-	if get_parent().edit_mode == 0:
+	if get_parent().edit_mode == 0 and not self.crashed:
 		self.crashed = true
 		hide()
 		get_parent().get_space_objects()

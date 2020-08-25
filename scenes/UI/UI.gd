@@ -2,6 +2,7 @@ extends Control
 
 
 var popup
+var rng = RandomNumberGenerator.new()
 var current_space_object
 
 func _ready():
@@ -55,6 +56,20 @@ func _on_edit_space_item_pressed(item_id):
 			true
 		)
 		$PlanetEditor.show()
+	elif item_text == "Generate Random Planets":
+		for i in range(100):
+			rng.randomize()
+
+			current_space_object = space_objects.create_space_object()
+			current_space_object.mass = rng.randi_range(1000, 100000)
+			current_space_object.scale.x = rng.randf_range(0.5, 10)
+			current_space_object.scale.y = current_space_object.scale.x
+			current_space_object.position.x = rng.randf_range(-5000, 5000)
+			current_space_object.position.y = rng.randf_range(-5000, 5000)
+			var r = rng.randf_range(0, 1)
+			var g = rng.randf_range(0, 1)
+			var b = rng.randf_range(0, 1)
+			current_space_object.positional_particles.process_material.color = Color(r, g, b)
 
 
 func init_space_object():
