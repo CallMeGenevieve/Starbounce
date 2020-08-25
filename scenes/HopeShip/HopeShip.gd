@@ -9,8 +9,8 @@ export var mass = 1
 export var speed = Vector2(0, 0)
 export var acceleration = Vector2(0, 0)
 export var thrust = Vector2(0, -1)
-export var angle_speed = 0
-export var direction = 0
+export var angle_speed = 0  # the speed at which the ship rotates every frame
+export var direction = 0  # indicates forward/backward/no acceleration from thrusters (1, -1, 0)
 
 export var stay_in_place = false
 
@@ -27,12 +27,22 @@ func _ready():
 
 func apply_acceleration(delta):
 	get_node("Sprite").rotation += self.angle_speed * delta
-	get_node("Positional Particles").rotation += self.angle_speed * delta
+	#get_node("Positional Particles").rotation += self.angle_speed * delta
 	get_node("CollisionShape2D").rotation += self.angle_speed * delta
 	
 	if self.direction != 0:
-		self.thrust.x = sin(get_node("Sprite").rotation) * self.thrust_power
-		self.thrust.y = -cos(get_node("Sprite").rotation) * self.thrust_power
+		if not $"Thruster Particles".emitting:
+			$"Thruster Particles".emitting = true
+		var dir_x = sin(get_node("Sprite").rotation)
+		var dir_y = -cos(get_node("Sprite").rotation)
+		self.thrust.x = dir_x * self.thrust_power
+		self.thrust.y = dir_y * self.thrust_power
+		
+		$"Thruster Particles".process_material.direction.x = -direction * dir_x
+		$"Thruster Particles".process_material.direction.y = -direction * dir_y
+	
+	elif $"Thruster Particles".emitting:
+		$"Thruster Particles".emitting = false
 	
 	self.acceleration += self.thrust * self.direction
 	
@@ -97,5 +107,7 @@ func set_trail_colour(colour):
 func change_particle_tick(game_speed, simulation_paused):
 	if simulation_paused:
 		$"Positional Particles".speed_scale = 0
+		$"Thruster Particles".speed_scale = 0
 	else:
 		$"Positional Particles".speed_scale = game_speed
+		$"Thruster Particles".speed_scale = game_speed
