@@ -3,11 +3,14 @@ extends Node2D
 
 export var gravitational_constant = 6.6743
 export var game_speed = 1
+
 export (bool) var simulation_paused = false
 var edit_mode = 0
 var all_space_objects
 var amount_of_space_objects
 var active_camera_index = 0
+var max_preview_path_length = 12
+var preview_tick = .05
 
 signal speed_change(new_speed)
 
@@ -27,8 +30,12 @@ func get_space_objects():
 	self.amount_of_space_objects = len(all_space_objects)
 
 
-func calculate_acceleration_from_force(space_object_1, space_object_2):
-	var distance: Vector2 = space_object_1.position - space_object_2.position
+func calculate_acceleration_from_force(space_object_1, space_object_2, preview):
+	var distance: Vector2
+	if preview:
+		distance = space_object_1.preview_position - space_object_2.preview_position
+	else:
+		distance = space_object_1.position - space_object_2.position
 	
 	var direction: Vector2 = Vector2(distance.x / distance.length(), distance.y / distance.length())
 	
@@ -85,14 +92,42 @@ func _process(delta):
 			
 				for j in range(i + 1, len(all_space_objects)):
 					var space_object_2 = all_space_objects[j]
-					var forces = calculate_acceleration_from_force(space_object_1, space_object_2)
+					var forces = calculate_acceleration_from_force(space_object_1, space_object_2, false)
 				
 					if not space_object_1.stay_in_place:
 						space_object_1.acceleration -= forces[1]
 					if not space_object_2.stay_in_place:
 						space_object_2.acceleration += forces[0]
 			
-				space_object_1.apply_tick(delta)
+				space_object_1.apply_tick(delta, false)
+				
+				# sets current position for preview line calculations
+				space_object_1.preview_position = space_object_1.position
+				space_object_1.preview_speed = space_object_1.speed
+				space_object_1.acceleration *= 0
+		
+		get_parent().get_node("HopeShipPath").points = PoolVector2Array()
+		get_parent().get_node("HopeShipPath").add_point($HopeShip.position)
+		
+		var preview_path_length = 0
+		while preview_path_length < max_preview_path_length:
+			preview_path_length += preview_tick
+			for i in range(len(all_space_objects)):
+				var space_object_1 = all_space_objects[i]
+				
+				for j in range(i + 1, len(all_space_objects)):
+					var space_object_2 = all_space_objects[j]
+					var forces = calculate_acceleration_from_force(space_object_1, space_object_2, true)
+				
+					if not space_object_1.stay_in_place:
+						space_object_1.acceleration -= forces[1]
+					if not space_object_2.stay_in_place:
+						space_object_2.acceleration += forces[0]
+				
+					space_object_1.apply_tick(delta, true)
+					space_object_1.acceleration *= 0
+			get_parent().get_node("HopeShipPath").add_point($HopeShip.preview_position)
+		pass
 
 
 func manage_camera():

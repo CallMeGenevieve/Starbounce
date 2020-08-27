@@ -7,6 +7,9 @@ export var mass = 10000
 export var acceleration = Vector2()
 export var speed = Vector2()
 
+export var preview_speed = Vector2()
+export var preview_position = Vector2()
+
 # if true, this SpaceObject will not be influenced by gravity
 export var stay_in_place = false
 export var crashed = false
@@ -15,8 +18,6 @@ var index
 var ui_node
 var positional_particles
 
-signal crashing(index)
-
 
 func _ready():
 	$"Positional Particles".process_material = ($"Positional Particles".process_material.duplicate())
@@ -24,21 +25,27 @@ func _ready():
 	self.positional_particles = $"Positional Particles"
 
 
-func apply_acceleration(delta):
-	self.speed += delta * self.acceleration
+func apply_acceleration(delta, preview: bool):
+	if preview:
+		self.preview_speed += get_parent().preview_tick * self.acceleration
+	else:
+		self.speed += delta * self.acceleration
 
 
-func apply_speed(delta):
-	self.position += delta * self.speed
+func apply_speed(delta, preview: bool):
+	if preview:
+		self.preview_position += get_parent().preview_tick * self.preview_speed
+	else:
+		self.position += delta * self.speed
 
 
-func apply_tick(delta):
-	apply_acceleration(delta)
-	apply_speed(delta)
+func apply_tick(delta, preview: bool):
+	apply_acceleration(delta, preview)
+	apply_speed(delta, preview)
 	
 	# I know this code is duplicate but idk what a better solution would be.
 	# Is there a possibility of importing functions here?!
-	if $Camera2D.current:
+	if $Camera2D.current and not preview:
 		ui_node.get_node("Mass").text = "Mass: " + str(self.mass)
 		ui_node.get_node("PosX").text = "PosX: " + str(self.position.x)
 		ui_node.get_node("PosY").text = "PosY: " + str(self.position.y)
