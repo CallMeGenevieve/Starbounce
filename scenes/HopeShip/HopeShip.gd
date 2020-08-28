@@ -111,16 +111,16 @@ func _process(delta):
 			elif self.angle_speed != 6:
 				self.angle_speed = 6
 			$"Steering Particles Right".emitting = true
-		elif Input.is_action_just_released("turn_ship_right"):
-			$"Steering Particles Right".emitting = false
 		if Input.is_action_pressed("turn_ship_left"):
 			if self.angle_speed > -6:
 				self.angle_speed -= delta * 2
 			elif self.angle_speed != -6:
 				self.angle_speed = -6
 			$"Steering Particles Left".emitting = true
-		elif Input.is_action_just_released("turn_ship_left"):
-			$"Steering Particles Left".emitting = false
+	if Input.is_action_just_released("turn_ship_right"):
+		$"Steering Particles Right".emitting = false
+	if Input.is_action_just_released("turn_ship_left"):
+		$"Steering Particles Left".emitting = false
 
 
 func _on_HopeShip_area_entered(area):
@@ -141,6 +141,10 @@ func change_particle_tick(game_speed, simulation_paused):
 	if simulation_paused:
 		$"Positional Particles".speed_scale = 0
 		$"Thruster Particles".speed_scale = 0
+		$"Steering Particles Left".speed_scale = 0
+		$"Steering Particles Right".speed_scale = 0
 	else:
 		$"Positional Particles".speed_scale = game_speed
 		$"Thruster Particles".speed_scale = game_speed
+		$"Steering Particles Left".speed_scale = game_speed
+		$"Steering Particles Right".speed_scale = game_speed
