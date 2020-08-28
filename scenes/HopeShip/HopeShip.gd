@@ -122,7 +122,6 @@ func _process(delta):
 	if Input.is_action_just_released("turn_ship_left"):
 		$"Steering Particles Left".emitting = false
 
-
 func _on_HopeShip_area_entered(area):
 	if get_parent().edit_mode == 0 and not self.crashed:
 		self.crashed = true
